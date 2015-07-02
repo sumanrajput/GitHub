@@ -171,7 +171,7 @@ if(('webkitSpeechRecognition' in window)){
     action: function(){
       $.gritter.add({
       title: "Clean Zone",
-      text: 'Your welcome!',
+      text: 'Your're welcome!',
       image: 'images/user-icon.png',
       class_name: 'clean',
       time: ''
