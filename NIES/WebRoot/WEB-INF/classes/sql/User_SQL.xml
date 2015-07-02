@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="User">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	<select id="getUserAllList" resultType="in.igsa.masters.user.UserVo">
+	SELECT umd.tblid AS tblId, 
+		   umd.user_id AS userId,
+	       umd.user_name AS userName, 
+	       umd.user_email AS userEmail, 
+	       umd.model_id AS modelId, 
+	       utd.role_id AS roleId,
+	       rmd.role_name AS roleName
+		FROM user_m_details umd ,user_t_details utd, role_m_details rmd
+			WHERE umd.user_id = utd.user_id AND  utd.role_id = rmd.role_id
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getUserById" resultType="in.igsa.masters.user.UserVo" parameterType="string">
+		SELECT umd.tblid AS tblId, 
+		   umd.user_id AS userId,
+	       umd.user_name AS userName, 
+	       umd.user_email AS userEmail, 
+	       umd.model_id AS modelId, 
+	       utd.role_id AS roleId,
+	       rmd.role_name AS roleName
+		FROM user_m_details umd ,user_t_details utd, role_m_details rmd
+			WHERE umd.tblid = #{tblId} AND umd.user_id = utd.user_id AND  utd.role_id = rmd.role_id
+  	</select>
+
+	<insert id="insertUser" parameterType="in.igsa.masters.user.UserVo">
+		INSERT INTO	user_m_details (user_id, user_name, user_email, model_id, created_by, created_date)
+		VALUES (#{userId}, #{userName}, #{userEmail}, #{modelId}, #{createdBy}, now())
+	</insert>
+	
+	<update id="updateUser" parameterType="in.igsa.masters.user.UserVo">
+		UPDATE user_m_details
+			SET user_id = #{userId}, user_name = #{userName}, user_email = #{userEmail}, model_id = #{modelId}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteUserById">
+		DELETE FROM user_m_details WHERE tblid = #{tblId}
+  	</delete>
+  	
+  	<select id="userProfile" parameterType="string" resultType="in.igsa.masters.user.UserVo">
+		SELECT 
+			utd.user_id AS userId, 
+			utd.role_id AS roleId,
+            rmd.role_name AS roleName,
+			umd.user_name AS userName, 
+			umd.user_email AS userEmail, 
+			umd.contact_number AS contactNumber,
+			umd.user_image AS imageFilePath,
+            imd.institution_name AS institutionName,
+            imd.institution_id AS institutionId,
+             cmd.country_id AS countryId,
+            cmd.country_name AS countryName,
+            umd.address AS address,
+            umd.model_id AS modelId            
+		FROM user_t_details utd, user_m_details umd, role_m_details rmd, institution_m_details imd, country_m_details cmd
+			WHERE utd.user_id=#{userId} AND utd.user_id = umd.user_id AND utd.role_id=rmd.role_id
+            AND imd.institution_id = umd.institution_id AND cmd.country_id = umd.country_id
+	</select>
+	
+	<update id="updateProfile" parameterType="in.igsa.masters.user.UserVo">
+		UPDATE user_m_details
+			SET user_name = #{userName}, contact_number = #{contactNumber}, address = #{address}, institution_id = #{institutionId}, country_id=#{countryId},user_image = #{imageFilePath}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE user_id = #{userId}
+  	</update>
+	
+</mapper>

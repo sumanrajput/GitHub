@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Standardized">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	<select id="getStandardizedList" resultType="in.igsa.masters.standardized.StandardizedVo">
+		SELECT tblid AS tblId, standardized_region_id AS standardizedId, standardized_region_details AS	standardizedName
+			FROM standardized_region_m_details 
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getStandardizedById" resultType="in.igsa.masters.standardized.StandardizedVo" parameterType="string">
+		SELECT tblid AS tblId, standardized_region_id AS standardizedId,standardized_region_details AS standardizedName
+			FROM standardized_region_m_details 
+		WHERE tblid = #{tblId}
+  	</select>
+
+	<insert id="insertStandardized" parameterType="in.igsa.masters.standardized.StandardizedVo">
+		INSERT INTO	standardized_region_m_details (standardized_region_id, standardized_region_details, created_by, created_date)
+		VALUES (#{standardizedId}, #{standardizedName},#{createdBy}, now())
+	</insert>
+	
+	<update id="updateStandardized" parameterType="in.igsa.masters.standardized.StandardizedVo">
+		UPDATE standardized_region_m_details
+			SET standardized_region_id = #{standardizedId}, standardized_region_details = #{standardizedName}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteStandardizedById">
+		DELETE FROM standardized_region_m_details WHERE tblid = #{tblId}
+  	</delete>
+</mapper>

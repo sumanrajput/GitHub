@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Institution">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	<select id="getInstitutionList" resultType="in.igsa.masters.institution.InstitutionVo">
+		SELECT tblid AS tblId, institution_id AS institutionId, institution_name AS	institutionName
+			FROM institution_m_details 
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getInstitutionById" resultType="in.igsa.masters.institution.InstitutionVo" parameterType="string">
+		SELECT tblid AS tblId, institution_id AS institutionId,institution_name AS institutionName
+			FROM institution_m_details 
+		WHERE tblid = #{tblId}
+  	</select>
+
+	<insert id="insertInstitution" parameterType="in.igsa.masters.institution.InstitutionVo">
+		INSERT INTO	institution_m_details (institution_id, institution_name, created_by, created_date)
+		VALUES (#{institutionId}, #{institutionName},#{createdBy}, now())
+	</insert>
+	
+	<update id="updateInstitution" parameterType="in.igsa.masters.institution.InstitutionVo">
+		UPDATE institution_m_details
+			SET institution_id = #{institutionId}, institution_name = #{institutionName}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteInstitutionById">
+		DELETE FROM institution_m_details WHERE tblid = #{tblId}
+  	</delete>
+</mapper>

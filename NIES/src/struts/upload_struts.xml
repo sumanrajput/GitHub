@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="upload" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		
+		<action name="upload" class="in.igsa.upload.FileUploadAction" method="input">
+			<result>/aim/manage.jsp</result>
+		</action>
+
+        <action name="doUpload" class="in.igsa.upload.FileUploadAction" method="upload">
+        	
+        	<result name="input">/aim/manage.jsp</result>
+        	<result>/aim/manage.jsp</result>
+			<!-- <result >/admin/upload_success.jsp</result> -->
+		</action>
+		
+		
+	</package>
+
+
+
+</struts>

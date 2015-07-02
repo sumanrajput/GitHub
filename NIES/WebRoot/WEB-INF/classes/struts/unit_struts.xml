@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="unit" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		
+		<action name="unit" method="getUnit" class="in.igsa.masters.unit.UnitAction">
+			<result name="success">/admin/unit.jsp</result>
+		</action>
+
+		<action name="delete-unit" method="deleteUnit" class="in.igsa.masters.unit.UnitAction">
+			<result name="success" type="redirectAction">unit</result>
+		</action>
+
+		<action name="new-unit" method="insertOrUpdate" class="in.igsa.masters.unit.UnitAction">
+			<result name="input">/admin/unit.jsp</result>
+			<result name="success" type="redirectAction">unit</result>
+		</action>
+	</package>
+</struts>

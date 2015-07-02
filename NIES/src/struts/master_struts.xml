@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="master" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		<!-- Working Condition  -->
+		
+		<action name="country" method="getAllCountry" class="in.igsa.masters.country.CountryAction">
+			<result name="success">/admin/country.jsp</result>
+		</action>
+
+		<action name="delete-country" method="deleteCountry" class="in.igsa.masters.country.CountryAction">
+			<result name="success" type="redirectAction">country</result>
+		</action>
+
+		<action name="new-country" method="insertOrUpdate" class="in.igsa.masters.country.CountryAction">
+			<result name="input">/admin/country.jsp</result>
+			<result name="success" type="redirectAction">country</result>
+		</action>
+
+		<!--  Institution Master  -->
+		
+		<action name="Institution" method="getInstitution" class="in.igsa.masters.institution.InstitutionAction">
+			<result name="success">/admin/institution.jsp</result>
+		</action>
+		
+		
+		<action name="modifyInstitution" method="mofifyInstitution" class="in.igsa.masters.institution.InstitutionAction">
+			<result name="success">/admin/institution.jsp</result>
+		</action>
+		
+		
+		<action name="deleteInstitution" method="deleteInstitution" class="in.igsa.masters.institution.InstitutionAction">
+			<result name="success">/admin/institution.jsp</result>
+		</action>
+		
+	</package>
+</struts>

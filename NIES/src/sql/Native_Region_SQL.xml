@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Role">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	<select id="getModelNativeStanderdizeRegion" resultType="in.igsa.manage.nativeregion.NativeRegionVo">
+		SELECT mrmd.tblid AS tblId, mrmd.model_id AS modelId, mrmd.region_id AS regionId, rmd.region_name AS regionName 
+			FROM model_region_t_details mrmd, region_m_details rmd, model_m_details mmd 
+		WHERE mrmd.model_id=mmd.model_id AND mrmd.region_id=rmd.region_id;
+  	</select>
+  	
+  	<select id="getModelNativeStanderdizeRegionById" resultType="in.igsa.manage.nativeregion.NativeRegionVo" parameterType="string">
+		SELECT tblid AS tblId, model_id AS modelId, region_id AS regionId
+			FROM model_region_t_details 
+		WHERE tblid = #{tblId}
+  	</select>
+
+	<insert id="insertModelNativeStanderdizeRegion" parameterType="in.igsa.manage.nativeregion.NativeRegionVo">
+		INSERT INTO	model_region_t_details (model_id, region_id, created_by, created_date)
+		VALUES (#{modelId}, #{regionId},#{createdBy}, now())
+	</insert>
+	
+	<update id="updateModelNativeStanderdizeRegion" parameterType="in.igsa.manage.nativeregion.NativeRegionVo">
+		UPDATE model_region_t_details
+			SET model_id = #{modelId}, region_id = #{regionId}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteModelNativeStanderdizeRegionById">
+		DELETE FROM model_region_t_details WHERE tblid = #{tblId}
+  	</delete>
+</mapper>

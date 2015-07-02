@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.Login">
+<cache/>
+	<select id="getLogin" parameterType="string" resultType="in.igsa.login.LoginVo">
+		SELECT 
+			lmd.user_id AS userId, 
+			lmd.password AS password,
+			umd.user_name AS userName, 
+			umd.user_email AS userEmail, 
+			lmd.role_id AS roleId, 
+			rmd.role_name AS roleName,
+			umd.user_image AS imageFilePath
+		FROM user_t_details lmd, user_m_details umd, role_m_details rmd 
+			WHERE lmd.user_id=#{userId} AND lmd.user_id = umd.user_id AND lmd.role_id=rmd.role_id
+	</select>
+	
+	<select id="getPasswordById" parameterType="string" resultType="string">
+		SELECT 
+			password AS oldPassword
+		FROM user_t_details 
+			WHERE user_id=#{userId}
+	</select>
+	
+	<insert id="insertLogin" parameterType="in.igsa.login.LoginVo">
+		INSERT INTO 
+			user_t_details(user_id, password, role_id, created_by, created_date)
+		VALUES(#{userId}, #{password}, #{roleId}, #{createdBy},now())
+	</insert>
+	
+	<update id="updateLogin" parameterType="in.igsa.login.LoginVo">
+		UPDATE user_t_details
+			SET role_id = #{roleId}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE user_id = #{userId}
+  	</update>
+  	
+  	<update id="changePassword" parameterType="in.igsa.login.LoginVo">
+		UPDATE user_t_details
+			SET password = #{password}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE user_id = #{userId}
+  	</update>
+  	
+  	
+  	<!--  Forget Password -->
+  	
+  	<select id="getUserId" resultType="string" parameterType="string">
+		select user_id AS userId from user_t_details where user_id=#{userId}
+	</select>
+	
+	<select id="getEmailId" resultType="in.igsa.login.LoginVo" parameterType="string">
+		select utd.password AS password,  umd.user_email AS userEmail,umd.user_name AS userName  from user_t_details utd, user_m_details umd where utd.user_id=#{userId} AND utd.user_id=umd.user_id;
+	</select>
+</mapper>

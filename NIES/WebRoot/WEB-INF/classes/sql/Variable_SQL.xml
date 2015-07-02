@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Variable">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+	<select id="getVariableNames" resultType="string">
+		SELECT 
+		    distinct(variable_name) AS variableName
+		FROM 
+		    variable_m_details
+  	</select>
+	
+	<select id="getVariableList" resultType="in.igsa.masters.variable.VariableVo">
+		SELECT 
+			vmd.tblid AS tblId,
+			vmd.variable_id AS variableId,
+		    vmd.variable_name AS variableName,
+		    amd.area_id AS areaId,
+			amd.area_name AS areaName,
+		    umd.unit_id AS unitId,
+		    umd.unit_name AS unitName,
+		    vmd.definition  AS definition 
+		FROM 
+			area_m_details amd, 
+		    unit_m_details umd, 
+		    variable_m_details vmd
+            
+		WHERE
+			amd.area_id = vmd.area_id AND
+            umd.unit_id = vmd.unit_id            
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getVariableById" resultType="in.igsa.masters.variable.VariableVo" parameterType="string">
+		SELECT 
+			vmd.tblid AS tblId,
+			vmd.variable_id AS variableId,
+		    vmd.variable_name AS variableName,
+		    amd.area_id AS areaId,
+			amd.area_name AS areaName,
+		    umd.unit_id AS unitId,
+		    umd.unit_name AS unitName,
+		    vmd.definition  AS definition 
+		FROM 
+			area_m_details amd, 
+		    unit_m_details umd, 
+		    variable_m_details vmd
+		WHERE 
+		amd.area_id = vmd.area_id AND
+        umd.unit_id = vmd.unit_id  AND
+		vmd.tblid = #{tblId}
+  	</select>
+
+	<insert id="insertVariable" parameterType="in.igsa.masters.variable.VariableVo">
+		INSERT INTO variable_m_details (variable_id, variable_name, area_id, unit_id, definition, created_by, created_date)
+		VALUES( #{variableId}, #{variableName}, #{areaId}, #{unitId}, #{definition}, #{createdBy}, now())
+	</insert>
+	
+	<update id="updateVariable" parameterType="in.igsa.masters.variable.VariableVo">
+		UPDATE 
+			variable_m_details
+		SET variable_id = #{variableId},
+			variable_name = #{variableName},
+			area_id = #{areaId},
+			unit_id = #{unitId},
+			definition = #{definition},
+			updated_by = #{updatedBy},
+			updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteVariableById">
+		DELETE FROM variable_m_details WHERE tblid = #{tblId}
+  	</delete>
+  	
+</mapper>

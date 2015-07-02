@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="role" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		
+		<action name="role" method="getRole" class="in.igsa.masters.role.RoleAction">
+			<result name="success">/admin/role.jsp</result>
+		</action>
+
+		<action name="delete-role" method="deleteRole" class="in.igsa.masters.role.RoleAction">
+			<result name="success" type="redirectAction">role</result>
+		</action>
+
+		<action name="new-role" method="insertOrUpdate" class="in.igsa.masters.role.RoleAction">
+			<result name="input">/admin/role.jsp</result>
+			<result name="success" type="redirectAction">role</result>
+		</action>
+	</package>
+</struts>

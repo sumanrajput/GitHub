@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="variable" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		
+		<action name="variable" method="getVariable" class="in.igsa.masters.variable.VariableAction">
+			<result name="success">/admin/variable.jsp</result>
+		</action>
+
+		<action name="delete-variable" method="deleteVariable" class="in.igsa.masters.variable.VariableAction">
+			<result name="success" type="redirectAction">variable</result>
+		</action>
+
+		<action name="new-variable" method="insertOrUpdate" class="in.igsa.masters.variable.VariableAction">
+			<result name="input">/admin/variable.jsp</result>
+			<result name="success" type="redirectAction">variable</result>
+		</action>
+		
+		<action name="doBulkVariable"  method="uploadVariable" class="in.igsa.masters.variable.VariableAction">
+			<result name="input">/admin/variable.jsp</result>
+        	<result name="success" type="redirectAction">variable</result>
+		</action>
+		
+		
+	</package>
+</struts>

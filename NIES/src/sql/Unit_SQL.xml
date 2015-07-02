@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Unit">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+	<select id="getUnitNames" resultType="string">
+		SELECT distinct(unit_name ) AS unitName
+			FROM unit_m_details 
+	</select>
+	
+	<select id="getUnitList" resultType="in.igsa.masters.unit.UnitVo">
+		SELECT tblid AS tblId, unit_id AS unitId, unit_name AS	unitName
+			FROM unit_m_details 
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getUnitById" resultType="in.igsa.masters.unit.UnitVo" parameterType="string">
+		SELECT tblid AS tblId, unit_id AS unitId,unit_name AS unitName
+			FROM unit_m_details 
+		WHERE tblid = #{tblId}
+  	</select>
+
+	<insert id="insertUnit" parameterType="in.igsa.masters.unit.UnitVo">
+		INSERT INTO	unit_m_details (unit_id, unit_name, created_by, created_date)
+		VALUES (#{unitId}, #{unitName},#{createdBy}, now())
+	</insert>
+	
+	<update id="updateUnit" parameterType="in.igsa.masters.unit.UnitVo">
+		UPDATE unit_m_details
+			SET unit_id = #{unitId}, unit_name = #{unitName}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteUnitById">
+		DELETE FROM unit_m_details WHERE tblid = #{tblId}
+  	</delete>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="login" namespace="/" extends="struts-default">
+
+		<action name="login">
+			<result>/aim/common/login.jsp</result>
+		</action>
+		
+		<action name="admin">
+				<result>/admin/admin.jsp</result>
+		</action>
+			
+		<action name="home">
+			<result>/aim/common/about.jsp</result>
+		</action>
+		
+		<action name="log-on" class="in.igsa.login.LoginAction">
+			<result name="success" type="redirectAction">home</result>
+			<result name="admin_login" type="redirectAction">admin</result>
+			<result name="master_login" type="redirectAction">admin</result>
+			<result name="error">/aim/common/login.jsp</result>
+			<result name="input">/aim/common/login.jsp</result>
+		</action>
+		
+		<action name="logout" method="logoff" class="in.igsa.login.LoginAction">
+			<result name="success" type="redirect">/index.jsp</result>
+		</action>
+		
+		<action name="password">
+				<result>/admin/change_password.jsp</result>
+		</action>
+		
+		<action name="change-password" method="passwordChange" class="in.igsa.login.ChangePasswordAction">
+				<result name="input">/admin/change_password.jsp</result>
+				<result name="success" type="redirectAction">password</result>
+				<result name="error">/admin/change_password.jsp</result>
+		</action>
+		
+		<action name="pass_rec">
+				<result>/aim/common/password_recovery.jsp</result>
+		</action>
+		
+		<action name="recovery">
+				<result>/aim/common/recovery.jsp</result>
+		</action>
+		
+		<action name="validateUser" method="validateUser" class="in.igsa.login.ForgetPasswordAction">
+				<result name="input">/aim/common/password_recovery.jsp</result>
+				<result name="success" type="redirectAction">recovery</result>
+				<result name="error">/aim/common/password_recovery.jsp</result>
+		</action>
+	</package>
+</struts>

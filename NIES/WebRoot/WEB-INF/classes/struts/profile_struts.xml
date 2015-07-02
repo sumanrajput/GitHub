@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="profile" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		
+		<action name="profile" method="viewProfile" class="in.igsa.masters.user.profile.ProfileAction">
+			<result name="success">/admin/profile.jsp</result>
+			<result name="error">/aim/common/login.jsp</result>
+		</action>
+
+		<action name="edit-profile" method="editProfile" class="in.igsa.masters.user.profile.ProfileAction">
+			<result name="success">/admin/edit_profile.jsp</result>
+			<result name="error">/aim/common/login.jsp</result>
+		</action>
+		
+		<action name="update-profile" method="updateProfile" class="in.igsa.masters.user.profile.ProfileAction">
+			<result name="success" type="redirectAction">profile</result>
+			<result name="input">/admin/edit_profile.jsp</result>
+			<result name="error">/admin/edit_profile.jsp</result>
+		</action>
+
+	<!-- 	<action name="new-user" method="insertOrUpdate" class="in.igsa.masters.user.profile.ProfileAction">
+			<result name="input">/admin/user.jsp</result>
+			<result name="success" type="redirectAction">user</result>
+		</action> -->
+	</package>
+</struts>

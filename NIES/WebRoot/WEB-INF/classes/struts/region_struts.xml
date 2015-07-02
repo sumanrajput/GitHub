@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="region" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		
+		<action name="region" method="getRegion" class="in.igsa.masters.region.RegionAction">
+			<result name="success">/admin/region.jsp</result>
+		</action>
+
+		<action name="delete-region" method="deleteRegion" class="in.igsa.masters.region.RegionAction">
+			<result name="success" type="redirectAction">region</result>
+		</action>
+
+		<action name="new-region" method="insertOrUpdate" class="in.igsa.masters.region.RegionAction">
+			<result name="input">/admin/region.jsp</result>
+			<result name="success" type="redirectAction">region</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="institution" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+	
+		<action name="institution" method="getInstitution" class="in.igsa.masters.institution.InstitutionAction">
+			<result name="success">/admin/institution.jsp</result>
+		</action>
+
+		<action name="delete-institution" method="deleteInstitution" class="in.igsa.masters.institution.InstitutionAction">
+			<result name="success" type="redirectAction">institution</result>
+		</action>
+
+		<action name="new-institution" method="insertOrUpdate" class="in.igsa.masters.institution.InstitutionAction">
+			<result name="input">/admin/institution.jsp</result>
+			<result name="success" type="redirectAction">institution</result>
+		</action>
+	</package>
+</struts>

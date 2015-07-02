@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="utils">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+	
+  	
+  	<select id="getMaxTblid" resultType="string" parameterType="string">
+  		SELECT MAX(tblid) from ${value}
+  	</select>
+  	
+</mapper>

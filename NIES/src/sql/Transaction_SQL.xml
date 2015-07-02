@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Transaction">
+	<insert id="insertEmpPersonalDetails" parameterClass="org.iitj.transaction.EmployeeVo">
+		INSERT INTO	EMP_PERSONAL_DETAILS(seq_number, emp_code, fname, mname, lname, dob, sex, salutation_code, blood_group,
+			marital_status, is_expatriate, religion, number_of_children, number_of_spouses, number_of_dependants,
+			l_street, l_city, l_district, l_state, l_country, l_pincode, l_phone1, l_phone2, l_mobile, l_fax,l_email, 
+			r_street,r_city, r_district, r_state, r_country, r_pincode, r_phone1, r_phone2, r_mobile, r_fax, r_email, pfno, 
+			nps_applicable, tax_id)
+		VALUES(#seqNumber#, #empCode#, #fname#, #mname#, #lname#, #dob#, #sex#, #salutationCode#, #bloodGroup#,
+			#maritalStatus#, #isExpatriate#, #religion#, #numberOfChildren#, #numberOfSpouses#, #numberOfDependants#,#localStreet#, 
+			#localCity#, #localDistrict#, #localState#, #localCountry#, #localPincode#, #localPhone1#, #localPhone2#, #localMobile#,
+			#localFax#, #localEmail#, #residenceStreet#, #residenceCity#, #residenceDistrict#, #residenceState#, #residenceCountry#, 
+			#residencePincode#, #residencePhone1#, #residencePhone2#, #residenceMobile#, #residenceFax#, #residenceEmail#, 
+			#pfno#, #npsApplicable#, #panNo#)
+	</insert>
+	
+	<insert id="insertEmpSalaryDetails" parameterClass="org.iitj.transaction.EmployeeVo">
+	<isNotEmpty property="stopSalary" >
+		INSERT INTO EMPLOYEE_SALARY_DETAILS(emp_code, designation_code, department_code, grade_code, emp_type, 
+			current_basic, hra_value, hra_amount , tra_amount, da_amount, date_of_joining, date_of_confirmation, date_of_last_promotion,salary_start_date, 
+			stop_salary, stop_salary_status, stop_salary_wef, stop_salary_reason, mode_of_payment, bank_account_no, bank_code)
+		VALUES(#empCode#, #designationCode#, #departmentCode#, #gradeCode#, #empType#, #currentBasic#, #hraValue#,#hraAmountDrawn#, 
+			#traValue#, #daValue#, #dateOfJoining#, #dateOfConfirmation#, #dateOfLastIncrPromotion#,#dateOfJoining#, #stopSalary#, 
+			#stopSalaryStatus#, #stopSalaryWef#, #stopSalaryReason#, #modeOfPayment#, #bankAccountNo#, #bankCode#) 
+	</isNotEmpty>
+	
+	<isEmpty property="stopSalary">
+		INSERT INTO EMPLOYEE_SALARY_DETAILS(emp_code, designation_code, department_code, grade_code, emp_type, 
+			current_basic, hra_value, hra_amount , tra_amount, da_amount, date_of_joining, date_of_confirmation, date_of_last_promotion, salary_start_date,
+			mode_of_payment, bank_account_no, bank_code)
+		VALUES(#empCode#, #designationCode#, #departmentCode#, #gradeCode#, #empType#, #currentBasic#, #hraValue#,#hraAmountDrawn#,  
+			#traValue#, #daValue#, #dateOfJoining#, #dateOfConfirmation#, #dateOfLastIncrPromotion#,#dateOfJoining#, #modeOfPayment#, #bankAccountNo#, #bankCode#) 
+	</isEmpty>
+	</insert>
+	
+	<select id="getAllowanceForEarning" resultClass="org.iitj.transaction.ed.EarningVo">
+		SELECT allowance_name AS allowanceName 
+		FROM ALLOWANCE_MASTER ORDER BY 1
+  	</select>
+  	
+</sqlMap>

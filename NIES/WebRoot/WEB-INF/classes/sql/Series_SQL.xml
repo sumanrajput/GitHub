@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Series">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+
+	<select id="getSeriesData" parameterType="in.igsa.upload.FileUploadVo" resultType="in.igsa.upload.FileUploadVo" >
+		select tblid as tblId, model_id as model, scenario as scenario, region as Region, variable as variable, unit as unit, uploaded_by as uploadedBy
+		from data_t_details
+		where variable = #{variable} and model_id in ( 
+				<foreach  item="models" index="index" collection="models" 
+		         separator="," >
+		            #{models}
+		    	</foreach> )
+		     and scenario in (
+		 	<foreach item="scenarios" index="index" collection="scenarios" 
+	       separator="," >
+	            #{scenarios}
+	    	</foreach>
+	    	)
+	    	and region in (
+		 	<foreach item="regions" index="index" collection="regions" 
+	       separator="," >
+	            #{regions}
+	    	</foreach>
+	    	)
+	</select>
+  	
+  	
+  	<select id="getSeriesDataValue" parameterType="in.igsa.upload.FileUploadVo" resultType="in.igsa.upload.FileUploadVo">
+  		select year as yy , value as yyVal
+  		from data_value_t_details
+  		where tblid_fk = #{tblId}
+  	</select>
+  	
+  	
+  	<select id="getScenarioNames" resultType="string">
+  		SELECT 
+		    distinct(scenario) AS scenario
+		FROM 
+		    data_t_details
+  	</select>
+  	
+  		<!-- 
+  		<select id="getSeriesData" parameterType="in.igsa.upload.FileUploadVo" resultType="in.igsa.upload.FileUploadVo" >
+		select tblid as tblId, model_id as model, scenario as scenario, region as Region, variable as variable, unit as unit, uploaded_by as uploadedBy
+		from data_t_details
+		where 
+		region in
+			<foreach item="regions" index="index" collection="regions" 
+	        open="('" separator="','" close="')">
+	            #{regions}
+	    	</foreach>
+		 and scenario in
+		 	<foreach item="scenarios" index="index" collection="scenarios" 
+	        open="('" separator="','" close="')">
+	            #{scenarios}
+	    	</foreach>
+		 and variable = #{variable} 
+		 and model_id in 
+				<foreach item="models" index="index" collection="models" 
+		        open="(" separator="," close=")">
+		            #{models}
+		    	</foreach>
+	</select> -->
+  	
+  	
+  	
+  	
+</mapper>

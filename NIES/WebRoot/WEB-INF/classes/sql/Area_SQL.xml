@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Area">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+	
+	<select id="getAreaName" resultType="string">
+		SELECT distinct(area_name) AS areaName
+			FROM area_m_details 
+	</select>
+	
+	
+	<select id="getAreaList" resultType="in.igsa.masters.area.AreaVo">
+		SELECT tblid AS tblId, area_id AS areaId, area_name AS	areaName
+			FROM area_m_details 
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getAreaById" resultType="in.igsa.masters.area.AreaVo" parameterType="string">
+		SELECT tblid AS tblId, area_id AS areaId,area_name AS areaName
+			FROM area_m_details 
+		WHERE tblid = #{tblId}
+  	</select>
+
+	<insert id="insertArea" parameterType="in.igsa.masters.area.AreaVo">
+		INSERT INTO	area_m_details (area_id, area_name, created_by, created_date)
+		VALUES (#{areaId}, #{areaName},#{createdBy}, now())
+	</insert>
+	
+	<update id="updateArea" parameterType="in.igsa.masters.area.AreaVo">
+		UPDATE area_m_details
+			SET area_id = #{areaId}, area_name = #{areaName}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteAreaById">
+		DELETE FROM area_m_details WHERE tblid = #{tblId}
+  	</delete>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="user" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+		
+		<action name="user" method="getUser" class="in.igsa.masters.user.UserAction">
+			<result name="success">/admin/user.jsp</result>
+		</action>
+
+		<action name="delete-user" method="deleteUser" class="in.igsa.masters.user.UserAction">
+			<result name="success" type="redirectAction">user</result>
+		</action>
+
+		<action name="new-user" method="insertOrUpdate" class="in.igsa.masters.user.UserAction">
+			<result name="input">/admin/user.jsp</result>
+			<result name="success" type="redirectAction">user</result>
+		</action>
+	</package>
+</struts>

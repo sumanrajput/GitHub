@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="resources/sqlMapConfig.properties" />
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="sql/Login_SQL.xml" />
+		<mapper resource="sql/Drop_SQL.xml" />
+		<mapper resource="sql/Master_SQL.xml" />
+		<mapper resource="sql/Role_SQL.xml" />
+		<mapper resource="sql/Region_SQL.xml" />
+		<mapper resource="sql/Area_SQL.xml" />
+		<mapper resource="sql/Institution_SQL.xml" />
+		<mapper resource="sql/Unit_SQL.xml" />
+		<mapper resource="sql/Prototype_SQL.xml" />
+		<mapper resource="sql/User_SQL.xml" />
+		<mapper resource="sql/Fileupload_SQL.xml" />
+		<mapper resource="sql/Standardized_SQL.xml" />
+		<mapper resource="sql/Variable_SQL.xml" />
+		<mapper resource="sql/Utils_SQL.xml" />
+		<mapper resource="sql/Model_Region_SQL.xml" />
+		<mapper resource="sql/Series_SQL.xml" />
+	</mappers>
+</configuration>

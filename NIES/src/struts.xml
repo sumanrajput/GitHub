@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd"> 
+<struts>
+	<constant name="struts.custom.i18n.resources" value="struts" />
+	<constant name="struts.action.extension" value="html" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<package name="default" namespace="/" extends="struts-default">
+	
+		<interceptors>
+            <interceptor name="loginInterceptor" class="in.igsa.common.AuthenticationInterceptor" />
+            <interceptor-stack name="chkSession">
+                <interceptor-ref name="defaultStack" />
+                <interceptor-ref name="loginInterceptor" />
+            </interceptor-stack>
+        </interceptors>
+
+        <global-results>
+            <result name="loginAction" type="redirect">/index.jsp</result>
+        </global-results>
+		
+	
+	
+		<action name="index">
+			<result>/index.jsp</result>
+		</action>
+		
+		<action name="Scenario"   class="in.igsa.scenario.ScenarioAction" >
+			<result>/aim/scenarion_data.jsp</result>
+		</action>
+		
+	</package>
+	<include file="struts/login_struts.xml" />
+	<include file="struts/series_struts.xml" />
+	<include file="struts/manage_struts.xml" />
+	<include file="struts/master_struts.xml" />
+	<include file="struts/upload_struts.xml" />
+	<include file="struts/role_struts.xml" />
+	<include file="struts/region_struts.xml" />
+	<include file="struts/area_struts.xml" />
+	<include file="struts/institution_struts.xml" />
+	<include file="struts/unit_struts.xml" />
+	<include file="struts/prototype_struts.xml" />
+	<include file="struts/standardized_struts.xml" />	
+	<include file="struts/user_struts.xml" />	
+	<include file="struts/variable_struts.xml" />
+	<include file="struts/profile_struts.xml" />
+	<include file="struts/model_region_struts.xml" />
+	
+		
+</struts>    

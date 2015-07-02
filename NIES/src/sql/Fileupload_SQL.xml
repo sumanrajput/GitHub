@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Fileupload">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+
+	<insert id="insertFileUpload" parameterType="in.igsa.upload.FileUploadVo">
+		INSERT INTO	data_t_details (model_id, scenario, region, variable,unit,uploaded_by,date_time,file_path)
+		VALUES (#{model}, #{scenario},#{Region},#{variable},#{unit},#{uploadedBy},#{dateTime},#{filePath})
+	</insert>
+
+	<select id="getFileUploadId" resultType="string" parameterType="in.igsa.upload.FileUploadVo">
+		SELECT tblid AS tblId
+			FROM data_t_details 
+		WHERE model_id = #{model} and scenario = #{scenario} and region = #{Region} and variable = #{variable} and unit =  #{unit} and uploaded_by =  #{uploadedBy}
+  	</select>
+
+	<insert id="insertFileUploadYearVal" parameterType="in.igsa.upload.FileUploadVo">
+		INSERT INTO	data_value_t_details (tblid_fk, year, value)
+		VALUES (#{tblId}, #{yy},#{yyVal})
+	</insert>
+	
+	
+	<select id="getScenarioReport" resultType="in.igsa.upload.FileUploadVo">
+		select model_id as model, scenario as scenario, date_time as dateTime, uploaded_by as uploadedBy ,file_path as filePath
+		from data_t_details 
+		group by uploaded_by, model_id , scenario
+		order by date_time desc;
+	</select>
+
+	<select id="checkModelSceRegion" resultType="int" parameterType="in.igsa.upload.FileUploadVo">
+		select count(*) as totalCount
+		from data_t_details
+		where  model_id = #{model} and scenario = #{scenario} and region = #{Region}
+	</select>
+
+
+	<delete id="deleteDataValueScenario" parameterType="in.igsa.upload.FileUploadVo"  flushCache="true" statementType="PREPARED" timeout="20">
+		delete from data_value_t_details where tblid_fk in (select tblid from data_t_details
+		where  model_id = #{model} and scenario = #{scenario} and region = #{Region})
+	</delete>
+	
+	<delete id="deleteDataScenario" parameterType="in.igsa.upload.FileUploadVo" flushCache="true" statementType="PREPARED" timeout="20">
+		delete from data_t_details where  model_id = #{model} and scenario = #{scenario} and region = #{Region}
+	</delete>
+	
+	
+	<select id="getScenarionData" parameterType="in.igsa.upload.FileUploadVo" resultType="in.igsa.upload.FileUploadVo" >
+		select tblid as tblId, model_id as model, scenario as scenario, region as Region, variable as variable, unit as unit, uploaded_by as uploadedBy
+		from data_t_details
+		where  model_id = #{model} and scenario = #{scenario}  and uploaded_by =  #{uploadedBy}
+	</select>
+  	
+  	
+  	<select id="getScenarionDataValue" parameterType="in.igsa.upload.FileUploadVo" resultType="in.igsa.upload.FileUploadVo">
+  		select year as yy , value as yyVal
+  		from data_value_t_details
+  		where tblid_fk = #{tblId}
+  	</select>
+  	
+
+</mapper>

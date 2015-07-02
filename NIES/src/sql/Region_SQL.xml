@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Region">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+	<select id="getRegionNames" resultType="string">
+		SELECT distinct(region_name ) AS regionName
+			FROM region_m_details 
+	</select>
+	
+	<select id="getRegionList" resultType="in.igsa.masters.region.RegionVo">
+		SELECT tblid AS tblId, region_id AS regionId, region_name AS	regionName
+			FROM region_m_details 
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getRegionById" resultType="in.igsa.masters.region.RegionVo" parameterType="string">
+		SELECT tblid AS tblId, region_id AS regionId,region_name AS regionName
+			FROM region_m_details 
+		WHERE tblid = #{tblId}
+  	</select>
+
+	<insert id="insertRegion" parameterType="in.igsa.masters.region.RegionVo">
+		INSERT INTO	region_m_details (region_id, region_name, created_by, created_date)
+		VALUES (#{regionId}, #{regionName},#{createdBy}, now())
+	</insert>
+	
+	<update id="updateRegion" parameterType="in.igsa.masters.region.RegionVo">
+		UPDATE region_m_details
+			SET region_id = #{regionId}, region_name = #{regionName}, updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteRegionById">
+		DELETE FROM region_m_details WHERE tblid = #{tblId}
+  	</delete>
+</mapper>

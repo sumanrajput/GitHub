@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Master">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+	
+	<!--  Country Master Query  -->
+	<select id="getCountryList" resultType="in.igsa.masters.country.CountryVo">
+		SELECT tblid AS tblId, country_id AS countryId, country_name AS	countryName
+			FROM country_m_details 
+		ORDER BY 2
+  	</select>
+  	
+  	<select id="getCountryById" resultType="in.igsa.masters.country.CountryVo" parameterType="string">
+		SELECT tblid as tblId,  country_id AS countryId,country_name AS countryName
+			FROM country_m_details 
+		WHERE tblid=#{tblId}
+  	</select>
+
+	<insert id="insertCountry" parameterType="in.igsa.masters.country.CountryVo">
+		INSERT INTO	country_m_details (country_id, country_name, created_by,created_date)
+		VALUES (#{countryId}, #{countryName},#{createdBy}, now())
+	</insert>
+	
+	<update id="updateCountry" parameterType="in.igsa.masters.country.CountryVo">
+		UPDATE country_m_details
+			SET country_id=#{countryId}, country_name = #{countryName}, updated_by=#{updatedBy}, updated_date=now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deleteCountryById" parameterType="string" flushCache="true" statementType="PREPARED" timeout="20">
+		DELETE FROM country_m_details WHERE tblid = #{tblId}
+  	</delete>
+  	
+	<!-- End Country Master Query  -->
+</mapper>

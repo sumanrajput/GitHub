@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DropDown">
+	<resultMap id="drop_down_result" type="in.igsa.popup.DropDownVo">
+		<result property="lookupId" column="id" />
+		<result property="lookupName" column="name" />
+	</resultMap>
+
+	<select id="getAllUnits" resultMap="drop_down_result">
+		SELECT unit_id AS id, unit_name AS name FROM unit_m_details ORDER BY 2
+    </select>
+    
+    
+	<select id="getAllAreas" resultMap="drop_down_result">
+		SELECT area_id AS id, area_name AS name  FROM area_m_details ORDER BY 2
+    </select>
+    
+    <select id="getAllModels" resultMap="drop_down_result">
+		 select model_id AS id, model_id AS name FROM model_m_details ORDER BY 2
+    </select>
+    
+    <select id="getAllRegions" resultMap="drop_down_result">
+		 select region_id AS id, region_name AS name FROM region_m_details ORDER BY 2
+    </select>
+    
+    <select id="getAllRoles" resultMap="drop_down_result">
+		 select role_id AS id, role_name AS name FROM role_m_details ORDER BY 2
+    </select>
+    
+    <select id="getAllInstitutions" resultMap="drop_down_result">
+		 select institution_id AS id, institution_name AS name FROM institution_m_details ORDER BY 2
+    </select>
+    
+     <select id="getAllCountries" resultMap="drop_down_result">
+		 select country_id AS id, country_name AS name FROM country_m_details ORDER BY 2
+    </select>
+</mapper>

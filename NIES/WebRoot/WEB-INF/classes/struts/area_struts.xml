@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+
+	<package name="area" namespace="/" extends="default">
+		<default-interceptor-ref name="chkSession"/>
+	<!-- Default interceptor stack. -->
+       <!--  <default-interceptor-ref name="paramsPrepareParamsStack"/> -->
+        
+		<action name="listArea" method="list" class="in.igsa.masters.area.AreaAction">
+			<result name="success">/admin/area.jsp</result>
+			  <!-- we don't need the full stack here -->
+          <!--   <interceptor-ref name="basicStack"/> -->
+		</action>
+		
+		<action name="editArea" method="edit" class="in.igsa.masters.area.AreaAction">
+			<result name="success">/admin/area.jsp</result>
+			  <!-- we don't need the full stack here -->
+           <!--  <interceptor-ref name="basicStack"/> -->
+		</action>
+
+		<action name="deleteArea" method="delete" class="in.igsa.masters.area.AreaAction">
+			<result name="success" type="redirectAction">listArea</result>
+		</action>
+
+		<action name="saveOrUpdateArea" method="saveOrUpdate" class="in.igsa.masters.area.AreaAction">
+			<result name="input">/admin/area.jsp</result>
+			<result name="success" type="redirectAction">listArea</result>
+		</action>
+	</package>
+</struts>

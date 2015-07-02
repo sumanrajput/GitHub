@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Prototype">
+	<!-- START SQL QUERIES RELATED TO THE INSTRUCTOR -->
+		
+	<select id="getModelNames" resultType="string">
+		SELECT distinct(model_id) AS modelId
+			FROM model_m_details 
+  	</select>
+	
+	
+	<select id="getPrototypeList" resultType="in.igsa.masters.prototype.PrototypeVo">
+		SELECT tblid AS tblId,
+	    model_id AS modelId,
+	    version AS version,
+	    current_version AS currentVersion,
+	    version_status AS versionStatus,
+	    person_name AS personName,
+	    entry_date AS entryDate,
+	    model_documentation AS modelDocumentation,
+	    model_solution_concept AS modelSolutionConcept,
+	    model_solution_horizon AS modelSolutionHorizon,
+	    model_solution_method AS modelSolutionMethod,
+	    model_exogenous_growth_drivers AS modelExogenousGrowthDrivers,
+	    cost_measure AS costMeasure,
+	    base_year AS baseYear,
+	    time_horizon AS timeHorizon,
+	    time_step AS timeStep,
+	    regional_coverage AS regionalCoverage,
+	    number_of_regions AS numberOfRegions,
+	    trade AS trade,
+	    number_of_sectors AS numberOfSectors,
+	    energy_service_sectors AS energyServiceSectors,
+	   economic_sectors AS economicSectors,
+	    number_of_technologies AS numberOfTechnologies,
+	    energy_technologies AS energyTechnologies,
+	    energy_technology_substitution AS energyTechnologySubstitution,
+	    greenhouse_gas_emissions AS greenhouseGasEmissions,
+	    climate_change AS climateChange,
+	    co_linkages AS coLinkages,
+	    resource_use AS resourceUse,
+	    land_use AS landUse,
+	    development AS development
+	FROM model_m_details
+  	</select>
+  	
+  	<select id="getPrototypeById" resultType="in.igsa.masters.prototype.PrototypeVo" parameterType="string">
+		SELECT tblid AS tblId,
+	    model_id AS modelId,
+	    version AS version,
+	    current_version AS currentVersion,
+	    version_status AS versionStatus,
+	    person_name AS personName,
+	    entry_date AS entryDate,
+	    model_documentation AS modelDocumentation,
+	    model_solution_concept AS modelSolutionConcept,
+	    model_solution_horizon AS modelSolutionHorizon,
+	    model_solution_method AS modelSolutionMethod,
+	    model_exogenous_growth_drivers AS modelExogenousGrowthDrivers,
+	    cost_measure AS costMeasure,
+	    base_year AS baseYear,
+	    time_horizon AS timeHorizon,
+	    time_step AS timeStep,
+	    regional_coverage AS regionalCoverage,
+	    number_of_regions AS numberOfRegions,
+	    trade AS trade,
+	    number_of_sectors AS numberOfSectors,
+	    energy_service_sectors AS energyServiceSectors,
+	   economic_sectors AS economicSectors,
+	    number_of_technologies AS numberOfTechnologies,
+	    energy_technologies AS energyTechnologies,
+	    energy_technology_substitution AS energyTechnologySubstitution,
+	    greenhouse_gas_emissions AS greenhouseGasEmissions,
+	    climate_change AS climateChange,
+	    co_linkages AS coLinkages,
+	    resource_use AS resourceUse,
+	    land_use AS landUse,
+	    development AS development
+	FROM model_m_details
+		WHERE tblid = #{tblId}
+  	</select>
+
+	<insert id="insertPrototype" parameterType="in.igsa.masters.prototype.PrototypeVo">
+		INSERT INTO	model_m_details (model_id, version, current_version, version_status , person_name, entry_date, model_documentation, model_solution_concept, model_solution_horizon, model_solution_method, model_exogenous_growth_drivers, cost_measure , base_year , time_horizon , time_step, regional_coverage, number_of_regions , trade, number_of_sectors, energy_service_sectors, economic_sectors, number_of_technologies, energy_technologies, energy_technology_substitution, greenhouse_gas_emissions, climate_change, co_linkages, resource_use, land_use, development, created_by,created_date)
+		VALUES (#{modelId}, #{version}, #{currentVersion}, #{versionStatus}, #{personName}, #{entryDate}, #{modelDocumentation}, #{modelSolutionConcept}, #{modelSolutionHorizon}, #{modelSolutionMethod}, #{modelExogenousGrowthDrivers}, #{costMeasure}, #{baseYear}, #{timeHorizon}, #{timeStep}, #{regionalCoverage}, #{numberOfRegions}, #{trade}, #{numberOfSectors}, #{energyServiceSectors}, #{economicSectors}, #{numberOfTechnologies}, #{energyTechnologies}, #{energyTechnologySubstitution}, #{greenhouseGasEmissions}, #{climateChange}, #{coLinkages}, #{resourceUse}, #{landUse}, #{development},#{createdBy}, now())
+	</insert>
+	
+	<update id="updatePrototype" parameterType="in.igsa.masters.prototype.PrototypeVo">
+		UPDATE model_m_details
+			SET model_id = #{modelId}, version = #{version}, current_version = #{currentVersion}, version_status = #{versionStatus}, person_name =  #{personName} ,entry_date =  #{entryDate}  , model_documentation =  #{modelDocumentation}, model_solution_concept = #{modelSolutionConcept} , model_solution_horizon = #{modelSolutionHorizon} , model_solution_method = #{modelSolutionMethod}  , model_exogenous_growth_drivers = #{modelExogenousGrowthDrivers}, cost_measure = #{costMeasure},  base_year = #{baseYear}, time_horizon = #{timeHorizon}, time_step = #{timeStep}, regional_coverage = #{regionalCoverage}, number_of_regions = #{numberOfRegions}, trade = #{trade},  number_of_sectors = #{numberOfSectors}, energy_service_sectors = #{energyServiceSectors}, economic_sectors = #{economicSectors}, number_of_technologies = #{numberOfTechnologies}, energy_technologies = #{energyTechnologies}, energy_technology_substitution = #{energyTechnologySubstitution}, greenhouse_gas_emissions = #{greenhouseGasEmissions}, climate_change = #{climateChange}, co_linkages = #{coLinkages}, resource_use = #{resourceUse}, land_use = #{landUse}, development = #{development},  updated_by = #{updatedBy}, updated_date = now()
+		WHERE tblid = #{tblId}
+  	</update>
+  	
+  	<delete id="deletePrototypeById">
+		DELETE FROM model_m_details WHERE tblid = #{tblId}
+  	</delete>
+</mapper>
