@@ -25,13 +25,31 @@ public class SeriesAction extends ActionSupport  {
 	private List<String> variableList = new ArrayList<>();
 	private List<String> scenarioList = new ArrayList<>();
 	private List<String> modelList = new ArrayList<>();
-	
+	private String variableTree; 
 	
 	@Override
 	public String execute() throws Exception {
+		
+
+		String[] slist = null;
+		
 		modelList = masterService.getModelNames();
 		scenarioList = service.getScenarioNames();
 		variableList = masterService.getVariableNames();
+		slist =   variableList.toArray(new String[variableList.size()]);
+		
+		
+		MXMTree tree = new MXMTree(new MXMNode("root", "", "Variable"));
+		  for (String data : slist) {
+	        	tree.addElement(data);
+	        	
+	        }
+		  
+		 Test.strTree = "";
+		 Test.counterCheck = -1;
+		    tree.printTree();
+		    variableTree = Test.strTree;
+		    
 		return SUCCESS;
 	}
 	
@@ -153,6 +171,14 @@ public class SeriesAction extends ActionSupport  {
 
 	public void setModelList(List<String> modelList) {
 		this.modelList = modelList;
+	}
+
+	public String getVariableTree() {
+		return variableTree;
+	}
+
+	public void setVariableTree(String variableTree) {
+		this.variableTree = variableTree;
 	}
 	
 	
