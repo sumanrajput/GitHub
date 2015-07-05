@@ -75,12 +75,12 @@
               
               <s:form class="form-horizontal group-border-dashed" action="new-variable.html">
              
-             <%--  <div class="form-group">
+             <div class="form-group">
                 <label class="col-sm-3 control-label">Variable Id<span style="color:red;">*</span></label>
                 <div class="col-sm-6">
-                  <s:textfield name="variableVo.variableId" class="form-control" placeholder="Variable Id" required="true"/>
+                  <s:textfield name="variableVo.variableId" class="form-control" placeholder="Variable Id" required="true" />
                 </div>
-              </div> --%>
+              </div>
                <div class="form-group">
               	 <label class="col-sm-3 control-label">Variable Name<span style="color:red;">*</span></label>
                 <div class="col-sm-6">
@@ -121,23 +121,17 @@
 					<s:else>
 						<s:submit  class="btn btn-primary" value=" Save >> " /> 
 					</s:else>
-					
 					<s:reset  class="btn btn-default" value="Reset >>" />
                 </div>
               </div>
-
             </s:form>
           </div>
         </div>
       </div>
     </div>
- 
- 
    	<div style="text-align: center;">
    		<h3> OR </h3>
    	</div>
-    
-    
     <div class="row">
       <div class="col-md-12">
         <div class="block-flat">
@@ -148,7 +142,7 @@
           
               <div style="font:bold;color:red">
 				<s:fielderror/>
-				<s:actionmessage/>
+			<%-- 	<s:actionmessage/> --%>
 			  </div>
               
               <s:form class="form-horizontal group-border-dashed" action="doBulkVariable.html" enctype="multipart/form-data">
@@ -183,6 +177,19 @@
          <display:caption media="html">
     		<strong>Variable Details</strong>
     	</display:caption>
+    
+
+		<display:header>
+		     <thead id="sModel">
+		      <tr>
+		       <th><input type="text" name="modelName" class="search_init"/></th>
+			   <th><input type="text" name="modelDescription" class="search_init"/></th>
+		       </tr>
+	        </thead>
+       </display:header>
+
+
+
     		<display:setProperty name="export.pdf" value="true"/>
 			<display:setProperty name="export.excel" value="true"/>
 			<display:setProperty name="export.cvs" value="true"/>
