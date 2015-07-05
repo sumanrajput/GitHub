@@ -241,9 +241,25 @@
 							$("#tree1").dynatree("disable");
 							tfrm = document.getElementById('result1');
 							//alert('SeriesData.html?region='+regionData+'&scenario='+modelData+'&variable='+variableData);
-							tfrm.src = 'SeriesData.html?region='+regionData+'&scenario='+scenarioData+'&variable='+variableData+'&model='+modelData;
+							//tfrm.src = 'SeriesData.html?region='+regionData+'&scenario='+scenarioData+'&variable='+variableData+'&model='+modelData;
 							
-							tfrm.contentWindow.focus();
+							 if (window.XMLHttpRequest) {
+					            // code for IE7+, Firefox, Chrome, Opera, Safari
+					            xmlhttp = new XMLHttpRequest();
+					        } else {
+					            // code for IE6, IE5
+					            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+					        }
+					        xmlhttp.onreadystatechange = function() {
+					            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					                document.getElementById("series_data_display").innerHTML = xmlhttp.responseText;
+					            }
+					        };
+					        xmlhttp.open("GET","SeriesData.html?region="+regionData+"&scenario="+scenarioData+"&variable="+variableData+"&model="+modelData,true);
+					        xmlhttp.send();
+							
+							
+							
 							$("#tree1").dynatree("enable");
 							
 						},
@@ -258,6 +274,7 @@
 					});
 				});
 			</script>	 
+			
     </head>
     <body>
         <s:include value="includes/menu.jsp" />
@@ -337,13 +354,14 @@
 	          			</div> 
                     </div>
                 </div>
-                
-                
-            	 <div class="row">
-						<div class="col-sm-10 col-sm-offset-1 slider-2-text">
-							<iframe src="" id="result1" style="zoom:0.60" width="99%" height="350" ></iframe>
+
+ 				<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<div id="series_data_display"></div>
 						</div>
 		       	</div>
+                
+            	
             </div>
         </div>
 			
