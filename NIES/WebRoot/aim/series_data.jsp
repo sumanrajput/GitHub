@@ -45,7 +45,7 @@
 	            <div class="row">
 	            <div class="col-sm-12">
 					<div class="box">
-							<h3>Model Scenario Details</h3>
+							<h3>Series Data</h3>
 							<div class="btn-group">
 						
 										<a href="#" onClick="$('#series_data').tableExport({type:'excel',escape:'false'});">
