@@ -81,7 +81,10 @@
 						
 							<h3>Model Scenario Details</h3>
 							<div class="btn-group">
-								<button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">
+							<a href="#" onClick="$('#scenario_01').tableExport({type:'excel',escape:'false'});">
+											<img src='export/icons/xls.png' width='24px'> XLS
+										</a>
+								<!-- <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">
 									<i class="fa fa-bars"></i> Export Table Data
 								</button>
 								<ul class="dropdown-menu " role="menu">
@@ -115,7 +118,7 @@
 											<img src='export/icons/pdf.png' width='24px'> PDF
 										</a>
 									</li>
-								</ul>
+								</ul> -->
 							</div>
 							<div class="box-body table-responsive" id='ptable'>
 							<table id="scenario_01" class="table table-striped">
@@ -156,7 +159,10 @@
 						
 							<h3>Model Scenario Details</h3>
 							<div class="btn-group">
-								<button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">
+							<a href="#" onClick="$('#scenario_02').tableExport({type:'excel',escape:'false'});">
+											<img src='export/icons/xls.png' width='24px'> XLS
+										</a>
+								<!-- <button class="btn btn-warning btn-sm dropdown-toggle" data-toggle="dropdown">
 									<i class="fa fa-bars"></i> Export Table Data
 								</button>
 								<ul class="dropdown-menu " role="menu">
@@ -190,7 +196,7 @@
 											<img src='export/icons/pdf.png' width='24px'> PDF
 										</a>
 									</li>
-								</ul>
+								</ul> -->
 							</div>
 							<div class="box-body table-responsive" id='ptable'>
 							<table id="scenario_02" class="table table-striped">

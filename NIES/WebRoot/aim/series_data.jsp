@@ -23,13 +23,11 @@
 <script type="text/javascript" src="export/jspdf/libs/sprintf.js"></script>
 <script type="text/javascript" src="export/jspdf/jspdf.js"></script>
 <script type="text/javascript" src="export/jspdf/libs/base64.js"></script>
-    	
-    	
     	<script type="text/javascript">
-	$(document).ready(function() {
-		$("#series_data").dataTable({
-			responsive : true
-		});
+		$(document).ready(function() {
+			$("#series_data").dataTable({
+				responsive : true
+			});
 
 		/* $("#scenario_02").dataTable({
 			responsive : true

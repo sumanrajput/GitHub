@@ -320,19 +320,7 @@
 							   	<h3> Variable : </h3>
 							    <div id="tree1" class="tree-overflow">
 							    
-							    <ul> <li class="folder" >Variable
-									<ul> <li class="folder" >  Emissions
-									<ul> <li class="folder" >    CO2
-									<ul> <li class="folder" >      land use
-									<ul> <li id="Emissions|CO2|land use|Agriculture" >        Agriculture
-									</li></ul><li  id="Emissions|CO2|Fossil Fuels and Industry" >      Fossil Fuels and Industry
-									</li> <li id="Emissions|CO2|land use" >      land use
-									</li></ul>
-									
-									<li  class="folder" >  GDP
-									<ul> <li id="GDP|MER" >    MER
-									</li></ul><li  id="Final Energy" >  Final Energy
-									</li></ul>
+							   <s:property value="variableTree" escape="false" /> 
 							    	<%-- <ul>
 							           <li id="" class="folder">Variables
 							                <ul>
