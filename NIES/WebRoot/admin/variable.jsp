@@ -177,19 +177,6 @@
          <display:caption media="html">
     		<strong>Variable Details</strong>
     	</display:caption>
-    
-
-		<display:header>
-		     <thead id="sModel">
-		      <tr>
-		       <th><input type="text" name="modelName" class="search_init"/></th>
-			   <th><input type="text" name="modelDescription" class="search_init"/></th>
-		       </tr>
-	        </thead>
-       </display:header>
-
-
-
     		<display:setProperty name="export.pdf" value="true"/>
 			<display:setProperty name="export.excel" value="true"/>
 			<display:setProperty name="export.cvs" value="true"/>
